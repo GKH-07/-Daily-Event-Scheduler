@@ -39,8 +39,20 @@ router.post('/add', verifyToken, async (req, res) => {
 });
 
 router.get('/:date', verifyToken, async (req, res) => {
-    const events = await Event.find({ user: req.user._id, date: req.params.date });
-    res.send(events);
+    try {
+        const events = await Event.find({ user: req.user._id, date: req.params.date }).sort({ start_time: 1 });
+
+        res.status(200).json({
+            success: true,
+            events: events
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: 'Failed to retrieve events',
+            error: err.message
+        });
+    }
 });
 
 module.exports = router;
