@@ -8,7 +8,10 @@ const eventRoute = require('./routes/event');
 
 dotenv.config();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: ["http://localhost:5173"],
+    credentials: true,
+}));
 
 app.use('/api/auth', authRoute);
 app.use('/api/events', eventRoute);
