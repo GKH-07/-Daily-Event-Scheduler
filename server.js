@@ -9,7 +9,7 @@ const eventRoute = require('./routes/event');
 dotenv.config();
 app.use(express.json());
 app.use(cors({
-    origin: ["http://localhost:5173"],
+    origin: ["http://localhost:5173","https://daily-event-scheduler-frontend-p64r.vercel.app"],
     credentials: true,
 }));
 
