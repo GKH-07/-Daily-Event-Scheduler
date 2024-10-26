@@ -42,10 +42,7 @@ router.get('/:date', verifyToken, async (req, res) => {
     try {
         const events = await Event.find({ user: req.user._id, date: req.params.date }).sort({ start_time: 1 });
 
-        res.status(200).json({
-            success: true,
-            events: events
-        });
+        res.send(events);
     } catch (err) {
         res.status(500).json({
             success: false,
