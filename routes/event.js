@@ -14,7 +14,13 @@ router.post('/add', verifyToken, async (req, res) => {
         ]
     });
 
-    if (overlap) return res.status(400).send('Event overlaps');
+    if (overlap) {
+        return res.status(400).json({
+            success: false,
+            message: 'Event overlaps',
+            error: 'There is an overlap with an existing event'
+        });
+    }
 
     const event = new Event({
         name,
